@@ -1,9 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.Promise = global.Promise;
 
@@ -18,18 +15,13 @@ const itemSchema = new Schema(
       required: true,
       default: "beginner",
     },
-    category: {
-      type: string,
-      // enum: ["frontend", "backend", "fullstack"],
-      required: true,
-      default: "frontend",
-    },
+    itemTags: [{ type: mongoose.Schema.Types.ObjectId, ref: "itemTag" }],
     itemChapters: [
       { type: mongoose.Schema.Types.ObjectId, ref: "itemChapter" },
     ],
-    author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     votes: { type: Number, default: 0 },
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+    author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   {
     timestamps: true,
