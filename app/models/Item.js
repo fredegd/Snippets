@@ -20,7 +20,7 @@ const itemSchema = new Schema(
     },
     category: {
       type: string,
-      enum: ["frontend", "backend", "fullstack"],
+      // enum: ["frontend", "backend", "fullstack"],
       required: true,
       default: "frontend",
     },
