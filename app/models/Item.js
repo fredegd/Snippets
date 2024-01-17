@@ -17,7 +17,7 @@ const itemSchema = new Schema(
     },
     category: {
       type: String,
-      enum: ["snippet", "cheatsheet", "tutorial", "essay"],
+      enum: ["Snippet", "Cheatsheet", "Tutorial", "Essay"],
       required: true,
       default: "cheatsheet",
     },

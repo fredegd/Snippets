@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
+import DeleteBlock from "./DeleteBlock";
 
 const EditItemForm = ({ item }) => {
   const EDITMODE = item._id === "new" ? false : true;
@@ -11,6 +12,7 @@ const EditItemForm = ({ item }) => {
     title: "",
     description: "",
     level: "",
+    category: "",
     itemTags: [],
     itemChapters: [],
     votes: 0,
@@ -23,6 +25,7 @@ const EditItemForm = ({ item }) => {
     startingItemData["title"] = item.title;
     startingItemData["description"] = item.description;
     startingItemData["level"] = item.level;
+    startingItemData["category"] = item.category;
     startingItemData["itemTags"] = item.itemTags;
     startingItemData["itemChapters"] = item.itemChapters;
   }
@@ -157,6 +160,20 @@ const EditItemForm = ({ item }) => {
           <option value="advanced">Advanced</option>
         </select>
 
+        <label>Category</label>
+        <select
+          name="category"
+          value={formData.category}
+          required={true}
+          onChange={handleChange}
+        >
+          <option value=""></option>
+          <option value="Snippet">Snippet</option>
+          <option value="Cheatsheet">Cheatsheet</option>
+          <option value="Tutotial">Tutotial</option>
+          <option value="Essay">Essay</option>
+        </select>
+
         {/* <label>Tags</label>
         <div className="grid grid-cols-2">
           {formData.itemTags?.map((itemTag, index) => (
@@ -178,6 +195,7 @@ const EditItemForm = ({ item }) => {
           value={EDITMODE ? "Update item" : "Create item"}
         />
       </form>
+      {EDITMODE && <DeleteBlock id={item._id} />}
     </div>
   );
 };
