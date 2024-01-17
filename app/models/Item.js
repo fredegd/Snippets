@@ -1,16 +1,13 @@
 import mongoose, { Schema } from "mongoose";
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.Promise = global.Promise;
 
 const itemSchema = new Schema(
   {
     imageBanner: { type: String, required: true },
-    title: { type: String, unique: true, required: true },
+    title: { type: String, required: true },
     description: { type: String, required: true },
     level: {
       type: String,
@@ -19,17 +16,18 @@ const itemSchema = new Schema(
       default: "beginner",
     },
     category: {
-      type: string,
-      enum: ["frontend", "backend", "fullstack"],
+      type: String,
+      enum: ["snippet", "cheatsheet", "tutorial", "essay"],
       required: true,
-      default: "frontend",
+      default: "cheatsheet",
     },
-    itemChapters: [
-      { type: mongoose.Schema.Types.ObjectId, ref: "itemChapter" },
-    ],
-    author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    votes: { type: Number, default: 0 },
-    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+    // itemTags: [{ type: mongoose.Schema.Types.ObjectId, ref: "itemTag" }],
+    // itemChapters: [
+    //   { type: mongoose.Schema.Types.ObjectId, ref: "itemChapter" },
+    // ],
+    // votes: { type: Number, default: 0 },
+    // comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+    // author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   {
     timestamps: true,

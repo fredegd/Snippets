@@ -1,38 +1,80 @@
 "use client";
+
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const EditItemForm = ({ item }) => {
   const EDITMODE = item._id === "new" ? false : true;
   const router = useRouter();
   const startingItemData = {
+    imageBanner: "some image",
     title: "",
     description: "",
-    priority: 1,
-    progress: 0,
-    status: "not started",
-    category: "Hardware Problem",
+    level: "",
+    itemTags: [],
+    itemChapters: [],
+    votes: 0,
+    comments: [],
+    author: "60f1b0b9e6b3a1b4a8f1b0b9",
   };
 
   if (EDITMODE) {
+    startingItemData["imageBanner"] = item.imageBanner;
     startingItemData["title"] = item.title;
     startingItemData["description"] = item.description;
-    startingItemData["priority"] = item.priority;
-    startingItemData["progress"] = item.progress;
-    startingItemData["status"] = item.status;
-    startingItemData["category"] = item.category;
+    startingItemData["level"] = item.level;
+    startingItemData["itemTags"] = item.itemTags;
+    startingItemData["itemChapters"] = item.itemChapters;
   }
 
   const [formData, setFormData] = useState(startingItemData);
 
-  const handleChange = (e) => {
+  const addItemTag = () => {
+    console.log(formData.itemTags.length);
+    if (
+      formData.itemTags.length >= 0 &&
+      formData.itemTags[formData.itemTags.length - 1] !== ""
+    ) {
+      setFormData((preState) => ({
+        ...preState,
+        itemTags: [...preState.itemTags, ""],
+      }));
+    } else {
+      alert("Please fill the empty tag first");
+      return;
+    }
+  };
+  const handleTagChange = (e) => {
     const value = e.target.value;
-    const name = e.target.name;
+    const index = e.target.getAttribute("data-index");
 
-    setFormData((preState) => ({
-      ...preState,
-      [name]: value,
-    }));
+    setFormData((preState) => {
+      const updatedItemTags = [...preState.itemTags];
+      updatedItemTags[index] = value;
+
+      return {
+        ...preState,
+        itemTags: updatedItemTags,
+      };
+    });
+  };
+
+  const handleChange = (e) => {
+    const { name, value, type } = e.target;
+
+    if (type === "file") {
+      console.log(e.target.files[0]);
+      setFormData((preState) => ({
+        ...preState,
+        [name]: e.target.files[0],
+        [name]: value,
+      }));
+    } else {
+      setFormData((preState) => ({
+        ...preState,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -50,12 +92,14 @@ const EditItemForm = ({ item }) => {
         throw new Error("Failed to update item");
       }
     } else {
+      console.log(formData);
       const res = await fetch("/api/Items", {
         method: "POST",
         body: JSON.stringify({ formData }),
         //@ts-ignore
         "Content-Type": "application/json",
       });
+      console.log(res);
       if (!res.ok) {
         throw new Error("Failed to create item");
       }
@@ -65,13 +109,6 @@ const EditItemForm = ({ item }) => {
     router.push("/");
   };
 
-  const categories = [
-    "Hardware Problem",
-    "Software Problem",
-    "Application Deveopment",
-    "Project",
-  ];
-
   return (
     <div className=" flex justify-center">
       <form
@@ -79,7 +116,16 @@ const EditItemForm = ({ item }) => {
         method="post"
         className="flex flex-col gap-3 w-1/2"
       >
-        <h3>{EDITMODE ? "Update Your item" : "Create New item"}</h3>
+        <h3>{EDITMODE ? "Update item" : "Create New item"}</h3>
+        {/* <label>Image banner</label>
+        <input
+          id="banner"
+          name="imageBanner"
+          type="file"
+          onChange={handleChange}
+          required={true}
+          // value={formData.imageBanner}
+        /> */}
         <label>Title</label>
         <input
           id="title"
@@ -98,83 +144,34 @@ const EditItemForm = ({ item }) => {
           value={formData.description}
           rows="5"
         />
-        <label>Category</label>
+        <label>Level</label>
         <select
-          name="category"
-          value={formData.category}
+          name="level"
+          value={formData.level}
+          required={true}
           onChange={handleChange}
         >
-          {categories?.map((category, _index) => (
-            <option key={_index} value={category}>
-              {category}
-            </option>
-          ))}
+          <option value=""></option>
+          <option value="beginner">Beginner</option>
+          <option value="medium">Medium</option>
+          <option value="advanced">Advanced</option>
         </select>
 
-        <label>Priority</label>
-        <div>
-          <input
-            id="priority-1"
-            name="priority"
-            type="radio"
-            onChange={handleChange}
-            value={1}
-            checked={formData.priority == 1}
-          />
-          <label>1</label>
-          <input
-            id="priority-2"
-            name="priority"
-            type="radio"
-            onChange={handleChange}
-            value={2}
-            checked={formData.priority == 2}
-          />
-          <label>2</label>
-          <input
-            id="priority-3"
-            name="priority"
-            type="radio"
-            onChange={handleChange}
-            value={3}
-            checked={formData.priority == 3}
-          />
-          <label>3</label>
-          <input
-            id="priority-4"
-            name="priority"
-            type="radio"
-            onChange={handleChange}
-            value={4}
-            checked={formData.priority == 4}
-          />
-          <label>4</label>
-          <input
-            id="priority-5"
-            name="priority"
-            type="radio"
-            onChange={handleChange}
-            value={5}
-            checked={formData.priority == 5}
-          />
-          <label>5</label>
+        {/* <label>Tags</label>
+        <div className="grid grid-cols-2">
+          {formData.itemTags?.map((itemTag, index) => (
+            <input
+              key={index}
+              onChange={handleTagChange}
+              type="text"
+              value={itemTag}
+              data-index={index}
+            />
+          ))}
         </div>
-        <label>Progress</label>
-        <input
-          type="range"
-          id="progress"
-          name="progress"
-          value={formData.progress}
-          min="0"
-          max="100"
-          onChange={handleChange}
-        />
-        <label>Status</label>
-        <select name="status" value={formData.status} onChange={handleChange}>
-          <option value="not started">Not Started</option>
-          <option value="started">Started</option>
-          <option value="done">Done</option>
-        </select>
+
+        <span onClick={addItemTag}>Add tag +</span> */}
+
         <input
           type="submit"
           className="btn max-w-xs"
@@ -185,4 +182,4 @@ const EditItemForm = ({ item }) => {
   );
 };
 
-export default EditSnippetForm;
+export default EditItemForm;
