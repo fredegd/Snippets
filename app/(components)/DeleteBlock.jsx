@@ -15,7 +15,6 @@ const DeleteBlock = ({ id }) => {
         method: "DELETE",
       });
       if (res.ok) {
-        console.log("item deleted", res, id);
         router.refresh();
         router.push("/");
       }
