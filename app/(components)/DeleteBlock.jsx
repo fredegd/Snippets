@@ -7,21 +7,31 @@ import { useRouter } from "next/navigation";
 const DeleteBlock = ({ id }) => {
   const router = useRouter();
 
-  const deleteTicket = async () => {
-    const res = await fetch(`http://localhost:3000/api/Tickets/${id}`, {
-      method: "DELETE",
-    });
-    if (res.ok) {
-      router.refresh();
+  const deleteItem = async () => {
+    if (
+      confirm(`you want to delete item_${id}` + "\n are you sure ???") == true
+    ) {
+      const res = await fetch(`http://localhost:3000/api/Items/${id}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        console.log("item deleted", res, id);
+        router.refresh();
+        router.push("/");
+      }
+    } else {
+      return;
     }
   };
 
   return (
-    <FontAwesomeIcon
-      icon={faX}
-      className=" text-red-400 hover:cursor-pointer hover:text-red-200"
-      onClick={deleteTicket}
-    />
+    <div onClick={deleteItem}>
+      {/* <FontAwesomeIcon
+        icon={faX}
+        className=" text-red-400 hover:cursor-pointer hover:text-red-200"
+      /> */}
+      {id}
+    </div>
   );
 };
 

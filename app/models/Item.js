@@ -7,7 +7,7 @@ mongoose.Promise = global.Promise;
 const itemSchema = new Schema(
   {
     imageBanner: { type: String, required: true },
-    title: { type: String, unique: true, required: true },
+    title: { type: String, required: true },
     description: { type: String, required: true },
     level: {
       type: String,
@@ -15,13 +15,19 @@ const itemSchema = new Schema(
       required: true,
       default: "beginner",
     },
-    itemTags: [{ type: mongoose.Schema.Types.ObjectId, ref: "itemTag" }],
-    itemChapters: [
-      { type: mongoose.Schema.Types.ObjectId, ref: "itemChapter" },
-    ],
-    votes: { type: Number, default: 0 },
-    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
-    author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    category: {
+      type: String,
+      enum: ["snippet", "cheatsheet", "tutorial", "essay"],
+      required: true,
+      default: "cheatsheet",
+    },
+    // itemTags: [{ type: mongoose.Schema.Types.ObjectId, ref: "itemTag" }],
+    // itemChapters: [
+    //   { type: mongoose.Schema.Types.ObjectId, ref: "itemChapter" },
+    // ],
+    // votes: { type: Number, default: 0 },
+    // comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+    // author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   {
     timestamps: true,

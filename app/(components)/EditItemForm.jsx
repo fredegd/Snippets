@@ -1,14 +1,13 @@
 "use client";
-import { set } from "mongoose";
+
 import { useRouter } from "next/navigation";
-import { comment } from "postcss";
 import React, { useState, useEffect } from "react";
 
 const EditItemForm = ({ item }) => {
   const EDITMODE = item._id === "new" ? false : true;
   const router = useRouter();
   const startingItemData = {
-    imageBanner: "",
+    imageBanner: "some image",
     title: "",
     description: "",
     level: "",
@@ -96,7 +95,7 @@ const EditItemForm = ({ item }) => {
       console.log(formData);
       const res = await fetch("/api/Items", {
         method: "POST",
-        body: formData,
+        body: JSON.stringify({ formData }),
         //@ts-ignore
         "Content-Type": "application/json",
       });
@@ -118,7 +117,7 @@ const EditItemForm = ({ item }) => {
         className="flex flex-col gap-3 w-1/2"
       >
         <h3>{EDITMODE ? "Update item" : "Create New item"}</h3>
-        <label>Image banner</label>
+        {/* <label>Image banner</label>
         <input
           id="banner"
           name="imageBanner"
@@ -126,7 +125,7 @@ const EditItemForm = ({ item }) => {
           onChange={handleChange}
           required={true}
           // value={formData.imageBanner}
-        />
+        /> */}
         <label>Title</label>
         <input
           id="title"
@@ -146,13 +145,19 @@ const EditItemForm = ({ item }) => {
           rows="5"
         />
         <label>Level</label>
-        <select name="level" value={formData.level} onChange={handleChange}>
+        <select
+          name="level"
+          value={formData.level}
+          required={true}
+          onChange={handleChange}
+        >
+          <option value=""></option>
           <option value="beginner">Beginner</option>
           <option value="medium">Medium</option>
           <option value="advanced">Advanced</option>
         </select>
 
-        <label>Tags</label>
+        {/* <label>Tags</label>
         <div className="grid grid-cols-2">
           {formData.itemTags?.map((itemTag, index) => (
             <input
@@ -165,7 +170,7 @@ const EditItemForm = ({ item }) => {
           ))}
         </div>
 
-        <span onClick={addItemTag}>Add tag +</span>
+        <span onClick={addItemTag}>Add tag +</span> */}
 
         <input
           type="submit"

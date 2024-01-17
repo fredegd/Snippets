@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     const items = await Item.find();
-
     return NextResponse.json({ items }, { status: 200 });
   } catch (error) {
     console.log("Error loading items: ", error);
@@ -16,9 +15,9 @@ export async function GET() {
 }
 
 export async function POST(request) {
-  console.log(request.file, request.body, "request");
   try {
     const body = await request.json();
+    console.log("formdata is passing", body.formData);
     const itemData = body.formData;
     await Item.create(itemData);
 
