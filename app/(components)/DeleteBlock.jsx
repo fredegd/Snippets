@@ -16,7 +16,7 @@ const DeleteBlock = ({ id }) => {
       });
       if (res.ok) {
         router.refresh();
-        router.push("/");
+        router.push("/browse");
       }
     } else {
       return;

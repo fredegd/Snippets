@@ -109,7 +109,7 @@ const EditItemForm = ({ item }) => {
     }
 
     router.refresh();
-    router.push("/");
+    router.push("/browse");
   };
 
   return (

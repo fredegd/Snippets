@@ -22,6 +22,7 @@ const ItemPage = async ({ params }) => {
 
   if (EDITMODE) {
     updateItemData = await getItembyId(params.id);
+    console.log(updateItemData);
     updateItemData = updateItemData.foundItem;
   } else {
     updateItemData = {
