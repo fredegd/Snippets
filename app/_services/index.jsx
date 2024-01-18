@@ -1,7 +1,7 @@
 const gitHubUrl =
   "https://api.github.com/search/repositories?q=created:>2017-10-22&sort=stars&order=desc";
 
-const url = "https://snippets-mongo-db.vercel.app/api/Items";
+const url = "/api/Items";
 
 export const getItems = async () => {
   try {

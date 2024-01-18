@@ -2,12 +2,9 @@ import EditItemForm from "@/app/(components)/EditItemForm";
 
 const getItembyId = async (id) => {
   try {
-    const res = await fetch(
-      `https://snippets-mongo-db.vercel.app/api/Items/${id}`,
-      {
-        cache: "no-store",
-      }
-    );
+    const res = await fetch(`/api/Items/${id}`, {
+      cache: "no-store",
+    });
 
     if (!res.ok) {
       throw new Error("Failed to fetch item");
