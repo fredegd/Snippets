@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
-mongoose.connect(process.env.MONGODB_URI);
+// mongoose.connect(process.env.MONGODB_URI);
 
-mongoose.Promise = global.Promise;
+// mongoose.Promise = global.Promise;
 
 const commentSchema = new mongoose.Schema(
   {
