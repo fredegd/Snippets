@@ -11,7 +11,7 @@ const DeleteBlock = ({ id }) => {
     if (
       confirm(`you want to delete item_${id}` + "\n are you sure ???") == true
     ) {
-      const res = await fetch(`http://localhost:3000/api/Items/${id}`, {
+      const res = await fetch(`/api/Items/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {
