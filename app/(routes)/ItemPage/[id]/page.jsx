@@ -9,9 +9,9 @@ const ItemPage = async ({ params }) => {
   const EDITMODE = params.id === "new" ? false : true;
 
   if (EDITMODE) {
-    console.log("updateing ItemData");
+
     updateItemData = await getItembyId(id);
-    console.log(updateItemData, "updateItemData");
+
     updateItemData = updateItemData?.foundItem;
   } else {
     updateItemData = {
