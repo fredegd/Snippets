@@ -1,15 +1,24 @@
+import connectToDB from "@/app/database";
 import Item from "@/app/models/Item";
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
-  const { id } = params;
-
-  const foundItem = await Item.findOne({ _id: id });
-  return NextResponse.json({ foundItem }, { status: 200 });
+  try {
+    await connectToDB();
+    const { id } = params;
+    console.log(request, "request is here");
+    const foundItem = await Item.findOne({ _id: id });
+    console.log(foundItem, "foundItem is here");
+    return NextResponse.json({ foundItem }, { status: 200 });
+  } catch (err) {
+    console.log(err);
+    return NextResponse.json({ message: "Error", err }, { status: 500 });
+  }
 }
 
 export async function PUT(request, { params }) {
   try {
+    await connectToDB();
     const { id } = params;
     // console.log("params", params, params.id, { id });
 
@@ -28,6 +37,7 @@ export async function PUT(request, { params }) {
 
 export async function DELETE(request, { params }) {
   try {
+    await connectToDB();
     const { id } = params;
     console.log("id of the deleted item:", id);
     const deleteItem = await Item.findByIdAndDelete(id);

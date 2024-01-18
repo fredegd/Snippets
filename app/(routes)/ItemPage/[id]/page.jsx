@@ -1,36 +1,25 @@
+import { getItembyId } from "@/app/_services";
 import EditItemForm from "@/app/(components)/EditItemForm";
 
-const getItembyId = async (id) => {
-  try {
-    const res = await fetch(`/api/Items/${id}`, {
-      cache: "no-store",
-    });
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch item");
-    }
-    return res.json();
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-let updateItemData = {};
+let updateItemData;
 
 const ItemPage = async ({ params }) => {
+  const { id } = params;
+  console.log(id, "id");
   const EDITMODE = params.id === "new" ? false : true;
 
   if (EDITMODE) {
-    updateItemData = await getItembyId(params.id);
-    console.log(updateItemData);
-    updateItemData = updateItemData.foundItem;
+    console.log("updateing ItemData");
+    updateItemData = await getItembyId(id);
+    console.log(updateItemData, "updateItemData");
+    updateItemData = updateItemData?.foundItem;
   } else {
     updateItemData = {
       _id: "new",
     };
   }
   //   return <div>Item Page{params.id}</div>;
-  return <EditItemForm item={updateItemData} />;
+  return updateItemData && <EditItemForm item={updateItemData} />;
 };
 
 export default ItemPage;

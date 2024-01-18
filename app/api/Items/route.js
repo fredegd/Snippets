@@ -1,10 +1,12 @@
+import connectToDB from "@/app/database";
 import Item from "@/app/models/Item";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
+    await connectToDB();
     const items = await Item.find();
-    return NextResponse.json({ items }, { status: 200 });
+    return items && NextResponse.json({ items }, { status: 200 });
   } catch (error) {
     console.log("Error loading items: ", error);
     return NextResponse.json(
@@ -16,6 +18,7 @@ export async function GET() {
 
 export async function POST(request) {
   try {
+    await connectToDB();
     const body = await request.json();
     console.log("formdata is passing", body.formData);
     const itemData = body.formData;

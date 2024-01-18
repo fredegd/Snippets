@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import DeleteBlock from "./DeleteBlock";
 
 const EditItemForm = ({ item }) => {
+
   const EDITMODE = item._id === "new" ? false : true;
   const router = useRouter();
   const startingItemData = {
@@ -95,7 +96,7 @@ const EditItemForm = ({ item }) => {
         throw new Error("Failed to update item");
       }
     } else {
-      console.log(formData);
+      console.log(formData, "formData");
       const res = await fetch("/api/Items", {
         method: "POST",
         body: JSON.stringify({ formData }),
