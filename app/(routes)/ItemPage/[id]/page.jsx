@@ -17,15 +17,18 @@ const getItemById = async (id) => {
   }
 };
 
-let updateItemData = {};
+
 
 const ItemPage = async ({ params }) => {
+  let updateItemData = {};
+
+console.log(updateItemData, "updateItemData first");
   const EDITMODE = params.id === "new" ? false : true;
 
   if (EDITMODE) {
     updateItemData = await getItemById(params.id);
-
     updateItemData = updateItemData?.foundItem;
+    console.log(updateItemData, "updateItemData");
   } else {
     updateItemData = {
       _id: "new",
