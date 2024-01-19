@@ -1,4 +1,6 @@
-import mongoose, { Schema } from "mongoose";
+// import mongoose, { Schema } from "mongoose";
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
 // mongoose.connect(process.env.MONGODB_URI);
 
@@ -36,4 +38,4 @@ const itemSchema = new Schema(
 
 const Item = mongoose.models.Item || mongoose.model("Item", itemSchema);
 
-export default Item;
+module.exports = Item;

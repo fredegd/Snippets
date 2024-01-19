@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import DeleteBlock from "./DeleteBlock";
 
 const EditItemForm = ({ item }) => {
-
+  console.log(item, "is the item passed to the form");
   const EDITMODE = item._id === "new" ? false : true;
   const router = useRouter();
   const startingItemData = {
@@ -171,7 +171,7 @@ const EditItemForm = ({ item }) => {
           <option value=""></option>
           <option value="Snippet">Snippet</option>
           <option value="Cheatsheet">Cheatsheet</option>
-          <option value="Tutotial">Tutotial</option>
+          <option value="Tutorial">Tutorial</option>
           <option value="Essay">Essay</option>
         </select>
 

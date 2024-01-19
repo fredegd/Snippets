@@ -21,31 +21,33 @@ function Browse() {
   // Make sure we have items needed for production build.
   if (!items) {
     return <p>No items.</p>;
-  }
+  } else {
+    // const items = data.items;
 
-  // const items = data.items;
+    const uniqueCategories = [
+      ...new Set(items?.map(({ category }) => category)),
+    ];
 
-  const uniqueCategories = [...new Set(items?.map(({ category }) => category))];
-
-  return (
-    <div className="p-5">
-      <div>
-        {items &&
-          uniqueCategories?.map((uniqueCategory, categoryIndex) => (
-            <div key={categoryIndex} className="mb-4">
-              <h2>{uniqueCategory}</h2>
-              <div className="lg:grid grid-cols-2 xl:grid-cols-4 ">
-                {items
-                  .filter((item) => item.category === uniqueCategory)
-                  .map((filteredItem, _index) => (
-                    <ItemCard id={_index} key={_index} item={filteredItem} />
-                  ))}
+    return (
+      <div className="p-5">
+        <div>
+          {items &&
+            uniqueCategories?.map((uniqueCategory, categoryIndex) => (
+              <div key={categoryIndex} className="mb-4">
+                <h2>{uniqueCategory}</h2>
+                <div className="lg:grid grid-cols-2 xl:grid-cols-4 ">
+                  {items
+                    .filter((item) => item.category === uniqueCategory)
+                    .map((filteredItem, _index) => (
+                      <ItemCard id={_index} key={_index} item={filteredItem} />
+                    ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default Browse;
