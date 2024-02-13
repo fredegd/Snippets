@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { getItemById } from "@/app/_services";
 // import { getItemById } from "../../../_services/index";
-import EditItemForm from "@/app/(components)/EditItemForm";
+import ItemForm from "@/app/(components)/ItemForm";
 
 export default function ItemFormPage({ params }) {
   console.log(params.id, "params.id in the form page");
@@ -31,7 +31,7 @@ export default function ItemFormPage({ params }) {
       {EDITMODE ? <h1>Edit Item</h1> : <h1>Add Item</h1>}
       <div>
         {itemData ? (
-          <EditItemForm item={itemData} />
+          <ItemForm item={itemData} />
         ) : (
           <div className="flex justify-center items-center h-screen">
             <h2>Loading...</h2>
