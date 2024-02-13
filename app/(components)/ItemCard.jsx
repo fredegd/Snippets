@@ -38,7 +38,10 @@ const ItemCard = ({ item }) => {
           />
         </div>
         <div className="ml-auto">
-          <Link href={`/ItemPage/${item._id}`} style={{ display: "contents" }}>
+          <Link
+            href={`/ItemFormPage/${item._id}`}
+            style={{ display: "contents" }}
+          >
             <FontAwesomeIcon icon={faPen}></FontAwesomeIcon>
           </Link>
         </div>
