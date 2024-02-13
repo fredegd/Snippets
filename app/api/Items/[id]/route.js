@@ -6,9 +6,8 @@ export async function GET(request, { params }) {
   try {
     await connectToDB();
     const { id } = params;
-
+    console.log("id is here", id);
     const foundItem = await Item.findOne({ _id: id });
-
     return NextResponse.json({ foundItem }, { status: 200 });
   } catch (err) {
     console.log(err);
@@ -20,6 +19,7 @@ export async function PUT(request, { params }) {
   try {
     await connectToDB();
     const { id } = params;
+    // console.log("params", params, params.id, { id });
 
     const body = await request.json();
     const itemData = body.formData;

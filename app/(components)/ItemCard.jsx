@@ -30,9 +30,9 @@ const ItemCard = ({ item }) => {
       <div className="flex mb-3">
         <div>
           <Image
-            src=""
             width={200}
             height={300}
+            src="https://images.unsplash.com/photo-1589443184442-719996f6e523"
             alt="random-img"
             className="rounded-md"
           />

@@ -6,12 +6,12 @@ import ItemCard from "../../(components)/ItemCard";
 import { getItems } from "../../_services";
 
 function Browse() {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getItems();
-      setItems(data.items);
+      setItems(data?.items);
     };
     fetchData();
   }, []);
@@ -20,7 +20,7 @@ function Browse() {
 
   // Make sure we have items needed for production build.
   if (!items) {
-    return <p>No items.</p>;
+    return <p>Loading...</p>;
   } else {
     // const items = data.items;
 
