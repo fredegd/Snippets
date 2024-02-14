@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { getItemById } from "@/app/_services";
 // import { getItemById } from "../../../_services/index";
-import ItemForm from "@/app/(components)/ItemForm";
+import ItemForm from "@/app/(Main)/_components/ItemForm";
 
 export default function ItemFormPage({ params }) {
   console.log(params.id, "params.id in the form page");

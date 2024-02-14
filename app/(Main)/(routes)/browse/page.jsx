@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import { useState, useEffect } from "react";
-import ItemCard from "../../(components)/ItemCard";
+import ItemCard from "../../_components/ItemCard";
 
-import { getItems } from "../../_services";
+import { getItems } from "../../../_services";
 
 function Browse() {
   const [items, setItems] = useState();
@@ -11,6 +11,7 @@ function Browse() {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getItems();
+      console.log(data?.items);
       setItems(data?.items);
     };
     fetchData();
@@ -23,7 +24,6 @@ function Browse() {
     return <p>Loading...</p>;
   } else {
     // const items = data.items;
-
     const uniqueCategories = [
       ...new Set(items?.map(({ category }) => category)),
     ];

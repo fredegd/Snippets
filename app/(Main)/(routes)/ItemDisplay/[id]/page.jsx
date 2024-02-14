@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
-import { getItemById } from "../../../_services";
+import { getItemById } from "../../../../_services";
 import CoverPage from "./(components)/CoverPage";
 import ItemDetails from "./(components)/ItemDetails";
 
