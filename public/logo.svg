@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   svg:contrastcolor="ffea83"
+   svg:template="Contrast"
+   svg:presentation="2.5"
+   svg:layouttype="undefined"
+   svg:specialfontid="undefined"
+   svg:id1="008"
+   svg:id2="203"
+   svg:companyname="code snippets"
+   svg:companytagline=""
+   version="1.1"
+   viewBox="0 0 13 13"
+   id="svg855"
+   sodipodi:docname="logo.svg"
+   inkscape:version="1.1.1 (c3084ef, 2021-09-22)"
+   width="13"
+   height="13"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs859" />
+  <sodipodi:namedview
+     id="namedview857"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="8.6943151"
+     inkscape:cx="5.6358666"
+     inkscape:cy="4.7732339"
+     inkscape:window-width="1678"
+     inkscape:window-height="969"
+     inkscape:window-x="0"
+     inkscape:window-y="53"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg855"
+     units="px"
+     height="13mm" />
+  <path
+     id="path17013"
+     style="fill:none;stroke:#f68d2e;stroke-width:1.23353;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:41.3278;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers stroke fill"
+     d="m 8.1706282,12.139832 c -3.114793,0.922662 -6.387797,-0.854411 -7.31045896,-3.9692037 -0.922662,-3.114793 0.85441196,-6.387797 3.96920496,-7.31045898 3.114793,-0.922662 6.3877968,0.85441098 7.3104578,3.96920398 0.922663,3.114793 -0.85441,6.3877977 -3.9692038,7.3104587 z"
+     sodipodi:nodetypes="sssss" />
+  <path
+     d="m 2.4008792,7.4265673 2.956243,-1.60056 v -0.07532 l -2.956243,-1.600561 v -1.148638 l 4.048358,2.221955 v 1.129808 l -4.048358,2.221955 z"
+     style="font-size:9.33337px;line-height:1.25;font-family:'IBM Plex Mono SemiBold';-inkscape-font-specification:'IBM Plex Mono SemiBold, ';white-space:pre;fill:#f68d2e;fill-opacity:1;stroke:#ffffff;stroke-width:0.201756;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path36440" />
+  <path
+     d="m 6.2796492,9.4561603 v -1.007411 h 4.5194738 v 1.007411 z"
+     style="font-size:9.33337px;line-height:1.25;font-family:'IBM Plex Mono SemiBold';-inkscape-font-specification:'IBM Plex Mono SemiBold, ';white-space:pre;fill:#f68d2e;fill-opacity:1;stroke:#ffffff;stroke-width:0.201756;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path36442" />
+</svg>

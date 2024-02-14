@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   svg:contrastcolor="ffea83"
+   svg:template="Contrast"
+   svg:presentation="2.5"
+   svg:layouttype="undefined"
+   svg:specialfontid="undefined"
+   svg:id1="008"
+   svg:id2="203"
+   svg:companyname="code snippets"
+   svg:companytagline=""
+   version="1.1"
+   viewBox="0 0 95.499998 13"
+   id="svg855"
+   sodipodi:docname="cs_logo.svg"
+   inkscape:version="1.1.1 (c3084ef, 2021-09-22)"
+   width="95.5"
+   height="13"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs859">
+    <rect
+       x="-8.147438"
+       y="19.48995"
+       width="24.921576"
+       height="17.013767"
+       id="rect26700" />
+    <rect
+       x="0.1597537"
+       y="-16.135122"
+       width="10.783374"
+       height="9.6650982"
+       id="rect18906" />
+    <rect
+       x="13.982695"
+       y="55.056862"
+       width="153.3727"
+       height="38.88937"
+       id="rect1548" />
+    <rect
+       x="13.982695"
+       y="55.056862"
+       width="153.3727"
+       height="38.88937"
+       id="rect1548-2" />
+  </defs>
+  <sodipodi:namedview
+     id="namedview857"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="4.6491595"
+     inkscape:cx="54.633531"
+     inkscape:cy="24.197922"
+     inkscape:window-width="1678"
+     inkscape:window-height="969"
+     inkscape:window-x="0"
+     inkscape:window-y="53"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg855"
+     units="px"
+     height="13mm" />
+  <text
+     xml:space="preserve"
+     id="text1546"
+     style="font-size:19.2533px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect1548);fill:#f68d2e;fill-opacity:1"
+     transform="matrix(0.64266663,0,0,0.64266663,12.962221,-36.38659)"><tspan
+       x="13.982422"
+       y="72.62201"
+       id="tspan39947"><tspan
+         style="font-family:'IBM Plex Mono Medium';-inkscape-font-specification:'IBM Plex Mono Medium, '"
+         id="tspan39945">&gt;SNIPPETS_</tspan></tspan></text>
+  <path
+     id="path17013"
+     style="fill:none;stroke:#f68d2e;stroke-width:1.23353;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:41.3278;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers stroke fill"
+     d="M 8.1706278,12.139832 C 5.0558348,13.062494 1.7828303,11.285421 0.86016881,8.1706279 -0.06249364,5.0558349 1.7145801,1.7828304 4.8293731,0.8601689 c 3.114793,-0.92266244 6.3877969,0.8544113 7.3104579,3.9692043 0.922663,3.114793 -0.85441,6.3877978 -3.9692032,7.3104588 z"
+     sodipodi:nodetypes="sssss" />
+  <text
+     xml:space="preserve"
+     id="text18904"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.66667px;line-height:1.25;font-family:'IBM Plex Mono SemiBold';-inkscape-font-specification:'IBM Plex Mono SemiBold, ';white-space:pre;shape-inside:url(#rect18906)" />
+  <path
+     d="M 2.4008782,7.4265665 5.357121,5.8260067 V 5.7506831 L 2.4008782,4.1501223 V 3.0014838 l 4.048358,2.2219555 v 1.1298072 l -4.048358,2.2219556 z"
+     style="font-size:9.33337px;line-height:1.25;font-family:'IBM Plex Mono SemiBold';-inkscape-font-specification:'IBM Plex Mono SemiBold, ';white-space:pre;fill:#f68d2e;fill-opacity:1;stroke:#ffffff;stroke-width:0.201756;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path36440" />
+  <path
+     d="m 6.2796486,9.4561599 v -1.007411 h 4.5194734 v 1.007411 z"
+     style="font-size:9.33337px;line-height:1.25;font-family:'IBM Plex Mono SemiBold';-inkscape-font-specification:'IBM Plex Mono SemiBold, ';white-space:pre;fill:#f68d2e;fill-opacity:1;stroke:#ffffff;stroke-width:0.201756;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path36442" />
+</svg>
