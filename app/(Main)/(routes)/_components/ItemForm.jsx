@@ -36,6 +36,15 @@ const EditItemForm = ({ item, setItem }) => {
       };
 
   const [formData, setFormData] = useState(startingItemData);
+  const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    console.log("tag", tags);
+    setFormData((preState) => ({
+      ...preState,
+      itemTags: tags,
+    }));
+  }, [tags]);
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
@@ -154,7 +163,7 @@ const EditItemForm = ({ item, setItem }) => {
           value={EDITMODE ? "Update item" : "Create item"}
         />
       </form>
-      <ItemTagForm tags={formData.itemTags} setFormData={setFormData} />
+      <ItemTagForm tags={tags} setTags={setTags} />
       {EDITMODE && <DeleteBlock id={item._id} />}
     </div>
   );

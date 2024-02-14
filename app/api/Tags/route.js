@@ -20,7 +20,7 @@ export async function POST(request) {
   try {
     await connectToDB();
     const body = await request.json();
-    console.log("formdata is passing", body);
+    console.log("formdata TAG is passing", body);
     const tagData = body;
     const created = await ItemTag.create(tagData).then((tag) => {
       return tag;
