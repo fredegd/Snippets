@@ -48,7 +48,7 @@ export default function SideBarNav() {
   return (
     <div className="h-full  md:w-64 xs:w-32  b-white border-r flex flex-col overflow-y-auto shadow-md ">
       <Link href={"/"}>
-        <div className="flex flex-col items-center justify-center h-16 border-b">
+        <div className="h-24 flex flex-col items-center justify-center  border-b">
           <Image
             src={"/logo.svg"}
             className="w-3/4 hidden sm:block md:hidden"
