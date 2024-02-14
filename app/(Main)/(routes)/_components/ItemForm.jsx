@@ -35,35 +35,35 @@ const EditItemForm = ({ item, setItem }) => {
       };
 
   const [formData, setFormData] = useState(startingItemData);
+  const [newTag, setNewTag] = useState(""); // State to hold the new tag being entered
 
   const addItemTag = () => {
-    if (
-      formData.itemTags?.length >= 0 &&
-      formData.itemTags[formData.itemTags.length - 1] !== ""
-    ) {
-      setFormData((preState) => ({
-        ...preState,
-        itemTags: [...preState.itemTags, ""],
+    if (newTag.trim() !== "") {
+      setFormData((prevData) => ({
+        ...prevData,
+        itemTags: [...prevData.itemTags, newTag.trim()],
       }));
-    } else {
-      alert("Please fill the empty tag first");
-      return;
+      setNewTag(""); // Clear the new tag input
     }
   };
-  // const handleTagChange = (e) => {
-  //   const value = e.target.value;
-  //   const index = e.target.getAttribute("data-index");
 
-  //   setFormData((preState) => {
-  //     const updatedItemTags = [...preState.itemTags];
-  //     updatedItemTags[index] = value;
+  const handleTagChange = (e, index) => {
+    const updatedTags = [...formData.itemTags];
+    updatedTags[index] = e.target.value;
+    setFormData((prevData) => ({
+      ...prevData,
+      itemTags: updatedTags,
+    }));
+  };
 
-  //     return {
-  //       ...preState,
-  //       itemTags: updatedItemTags,
-  //     };
-  //   });
-  // };
+  const handleRemoveTag = (index) => {
+    const updatedTags = [...formData.itemTags];
+    updatedTags.splice(index, 1);
+    setFormData((prevData) => ({
+      ...prevData,
+      itemTags: updatedTags,
+    }));
+  };
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
@@ -122,15 +122,6 @@ const EditItemForm = ({ item, setItem }) => {
         method="post"
         className="flex flex-col gap-3 w-1/2"
       >
-        {/* <label>Image banner</label>
-        <input
-          id="banner"
-          name="imageBanner"
-          type="file"
-          onChange={handleChange}
-          required={true}
-          // value={formData.imageBanner}
-        /> */}
         <label>Banner</label>
         <input
           id="imageBanner"
@@ -187,25 +178,35 @@ const EditItemForm = ({ item, setItem }) => {
 
         <label>Tags</label>
 
-        {item.itemTags?.map((tag, index) => (
-          <input
-            id="itemTags"
-            name="itemTags"
-            key={index}
-            type="text"
-            onChange={handleChange}
-            value={tag}
-            data-index={index}
-          />
+        {formData.itemTags?.map((tag, index) => (
+          <div key={index} className="flex items-center gap-2">
+            <input
+              id={`itemTag_${index}`}
+              name="itemTags"
+              type="text"
+              onChange={(e) => handleTagChange(e, index)}
+              value={tag}
+            />
+            <span
+              onClick={() => handleRemoveTag(index)}
+              className="cursor-pointer"
+            >
+              Remove
+            </span>
+          </div>
         ))}
-        <input
-          id="itemTags"
-          name="itemTags"
-          type="text"
-          onChange={handleChange}
-        />
-        <span onClick={addItemTag}>Add tag +</span>
-
+        <div className="flex items-center gap-2">
+          <input
+            id="newTag"
+            name="newTag"
+            type="text"
+            onChange={(e) => setNewTag(e.target.value)}
+            value={newTag}
+          />
+          <span onClick={addItemTag} className="cursor-pointer">
+            Add tag +
+          </span>
+        </div>
         <input
           type="submit"
           className="btn max-w-xs border border-orange-accent bg-slate-200 hover:bg-orange-accent"
