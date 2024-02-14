@@ -1,11 +1,11 @@
 import connectToDB from "@/app/database";
-import Tag from "@/app/models/Tag";
+import ItemTag from "@/app/models/ItemTag";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
     await connectToDB();
-    const tags = await Tag.find();
+    const tags = await ItemTag.find();
     return tags && NextResponse.json({ tags }, { status: 200 });
   } catch (error) {
     console.log("Error loading tags: ", error);
@@ -20,11 +20,16 @@ export async function POST(request) {
   try {
     await connectToDB();
     const body = await request.json();
-    console.log("formdata is passing", body.formData);
-    const tagData = body.formData;
-    await Tag.create(tagData);
+    console.log("formdata is passing", body);
+    const tagData = body;
+    const created = await ItemTag.create(tagData).then((tag) => {
+      return tag;
+    });
 
-    return NextResponse.json({ message: "Item Created" }, { status: 200 });
+    return NextResponse.json(
+      { message: "Item Created", created },
+      { status: 200 }
+    );
   } catch (err) {
     console.log(err);
     return NextResponse.json({ message: "Error", err }, { status: 500 });

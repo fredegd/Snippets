@@ -2,8 +2,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import ItemCard from "./_components/ItemCard";
-
-import { getItems } from "../../../_services";
+import { getItems } from "@/app/_services/index";
 
 function Browse() {
   const [items, setItems] = useState();

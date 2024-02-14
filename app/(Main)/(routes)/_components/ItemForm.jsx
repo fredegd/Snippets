@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
+import ItemTagForm from "./ItemTagForm";
 import DeleteBlock from "./DeleteBlock";
 
 const EditItemForm = ({ item, setItem }) => {
@@ -35,35 +36,6 @@ const EditItemForm = ({ item, setItem }) => {
       };
 
   const [formData, setFormData] = useState(startingItemData);
-  const [newTag, setNewTag] = useState(""); // State to hold the new tag being entered
-
-  const addItemTag = () => {
-    if (newTag.trim() !== "") {
-      setFormData((prevData) => ({
-        ...prevData,
-        itemTags: [...prevData.itemTags, newTag.trim()],
-      }));
-      setNewTag(""); // Clear the new tag input
-    }
-  };
-
-  const handleTagChange = (e, index) => {
-    const updatedTags = [...formData.itemTags];
-    updatedTags[index] = e.target.value;
-    setFormData((prevData) => ({
-      ...prevData,
-      itemTags: updatedTags,
-    }));
-  };
-
-  const handleRemoveTag = (index) => {
-    const updatedTags = [...formData.itemTags];
-    updatedTags.splice(index, 1);
-    setFormData((prevData) => ({
-      ...prevData,
-      itemTags: updatedTags,
-    }));
-  };
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
@@ -176,43 +148,13 @@ const EditItemForm = ({ item, setItem }) => {
           <option value="Essay">Essay</option>
         </select>
 
-        <label>Tags</label>
-
-        {formData.itemTags?.map((tag, index) => (
-          <div key={index} className="flex items-center gap-2">
-            <input
-              id={`itemTag_${index}`}
-              name="itemTags"
-              type="text"
-              onChange={(e) => handleTagChange(e, index)}
-              value={tag}
-            />
-            <span
-              onClick={() => handleRemoveTag(index)}
-              className="cursor-pointer"
-            >
-              Remove
-            </span>
-          </div>
-        ))}
-        <div className="flex items-center gap-2">
-          <input
-            id="newTag"
-            name="newTag"
-            type="text"
-            onChange={(e) => setNewTag(e.target.value)}
-            value={newTag}
-          />
-          <span onClick={addItemTag} className="cursor-pointer">
-            Add tag +
-          </span>
-        </div>
         <input
           type="submit"
           className="btn max-w-xs border border-orange-accent bg-slate-200 hover:bg-orange-accent"
           value={EDITMODE ? "Update item" : "Create item"}
         />
       </form>
+      <ItemTagForm tags={formData.itemTags} setFormData={setFormData} />
       {EDITMODE && <DeleteBlock id={item._id} />}
     </div>
   );

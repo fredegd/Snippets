@@ -10,6 +10,7 @@ const itemTagSchema = new Schema(
   }
 );
 
-const ItemTag = mongoose.models.Item || mongoose.model("Item", itemTagSchema);
+const ItemTag =
+  mongoose.models.Item || mongoose.model("ItemTag", itemTagSchema);
 
 module.exports = ItemTag;
