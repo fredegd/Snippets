@@ -1,9 +1,5 @@
-import DeleteBlock from "./DeleteBlock";
-import ProgressDisplay from "./ProgressDisplay";
 import Link from "next/link";
 import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
 
 const ItemCard = ({ item }) => {
   function formatTimestamp(timestamp) {
@@ -32,18 +28,10 @@ const ItemCard = ({ item }) => {
           <Image
             width={200}
             height={300}
-            src="https://images.unsplash.com/photo-1589443184442-719996f6e523"
+            src={item.imageBanner}
             alt="random-img"
             className="rounded-md"
           />
-        </div>
-        <div className="ml-auto">
-          <Link
-            href={`/ItemFormPage/${item._id}`}
-            style={{ display: "contents" }}
-          >
-            <FontAwesomeIcon icon={faPen}></FontAwesomeIcon>
-          </Link>
         </div>
       </div>
       <Link href={`/ItemDisplay/${item._id}`} style={{ display: "contents" }}>
@@ -55,7 +43,6 @@ const ItemCard = ({ item }) => {
         <div className="flex mt-2">
           <div className="flex flex-col">
             <p className="text-xs  my-1">{createdDateTime}</p>
-            {/* <ProgressDisplay progress={50} /> */}
           </div>
           <div className="ml-auto  flex items-end">
             <span>{item._id}</span>

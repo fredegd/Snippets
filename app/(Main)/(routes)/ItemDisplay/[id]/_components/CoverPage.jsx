@@ -1,14 +1,16 @@
 import Image from "next/image";
 
 export default function CoverPage({ data }) {
+  console.log(data.imageBanner);
   return (
     <div>
-      <h2 className="text-gray-400 mb-3">Preview:</h2>
-      {data?.banner?.url ? (
+      {data.imageBanner ? (
         <div className="w-full flex justify-center">
           <Image
-            src={data.banner.url}
+            src={data.imageBanner}
             alt={data.title}
+            width={600}
+            height={500}
             className="w-full sm:w-5/6  xl:w-4/6 "
           />
         </div>

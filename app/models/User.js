@@ -1,10 +1,7 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-// mongoose.connect(process.env.MONGODB_URI);
-
-// mongoose.Promise = global.Promise;
-
-const userSchema = new mongoose.Schema(
+const userSchema = new Schema(
   {
     username: { type: String, unique: true, required: true },
     email: { type: String, unique: true, required: true },

@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
 import { useState, useEffect } from "react";
-import ItemCard from "../../_components/ItemCard";
+import ItemCard from "./_components/ItemCard";
 
 import { getItems } from "../../../_services";
 
 function Browse() {
   const [items, setItems] = useState();
+  const [filters, setFilters] = useState();
 
   useEffect(() => {
     const fetchData = async () => {

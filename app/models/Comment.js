@@ -1,10 +1,7 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-// mongoose.connect(process.env.MONGODB_URI);
-
-// mongoose.Promise = global.Promise;
-
-const commentSchema = new mongoose.Schema(
+const commentSchema = new Schema(
   {
     content: { type: String, required: true },
     author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },

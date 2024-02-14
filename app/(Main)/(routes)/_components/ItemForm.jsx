@@ -4,39 +4,41 @@ import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import DeleteBlock from "./DeleteBlock";
 
-const EditItemForm = ({ item }) => {
-  console.log(item, "is the item passed to the form");
+const EditItemForm = ({ item, setItem }) => {
   const EDITMODE = item._id === "new" ? false : true;
   const router = useRouter();
-  const startingItemData = {
-    imageBanner: "some image",
-    title: "",
-    description: "",
-    level: "",
-    category: "",
-    itemTags: [],
-    itemChapters: [],
-    votes: 0,
-    comments: [],
-    author: "60f1b0b9e6b3a1b4a8f1b0b9",
-  };
-
-  if (EDITMODE) {
-    startingItemData["imageBanner"] = item.imageBanner;
-    startingItemData["title"] = item.title;
-    startingItemData["description"] = item.description;
-    startingItemData["level"] = item.level;
-    startingItemData["category"] = item.category;
-    startingItemData["itemTags"] = item.itemTags;
-    startingItemData["itemChapters"] = item.itemChapters;
-  }
+  const startingItemData = !EDITMODE
+    ? {
+        imageBanner:
+          "https://images.unsplash.com/photo-1589443184442-719996f6e523",
+        title: "",
+        description: "",
+        level: "",
+        category: "",
+        itemTags: [],
+        itemChapters: [],
+        votes: 0,
+        comments: [],
+        author: "60f1b0b9e6b3a1b4a8f1b0b9",
+      }
+    : {
+        imageBanner: item.imageBanner,
+        title: item.title,
+        description: item.description,
+        level: item.level,
+        category: item.category,
+        itemTags: item.itemTags,
+        itemChapters: item.itemChapters,
+        votes: 0,
+        comments: [],
+        author: "60f1b0b9e6b3a1b4a8f1b0b9",
+      };
 
   const [formData, setFormData] = useState(startingItemData);
 
   const addItemTag = () => {
-    console.log(formData.itemTags.length);
     if (
-      formData.itemTags.length >= 0 &&
+      formData.itemTags?.length >= 0 &&
       formData.itemTags[formData.itemTags.length - 1] !== ""
     ) {
       setFormData((preState) => ({
@@ -48,20 +50,20 @@ const EditItemForm = ({ item }) => {
       return;
     }
   };
-  const handleTagChange = (e) => {
-    const value = e.target.value;
-    const index = e.target.getAttribute("data-index");
+  // const handleTagChange = (e) => {
+  //   const value = e.target.value;
+  //   const index = e.target.getAttribute("data-index");
 
-    setFormData((preState) => {
-      const updatedItemTags = [...preState.itemTags];
-      updatedItemTags[index] = value;
+  //   setFormData((preState) => {
+  //     const updatedItemTags = [...preState.itemTags];
+  //     updatedItemTags[index] = value;
 
-      return {
-        ...preState,
-        itemTags: updatedItemTags,
-      };
-    });
-  };
+  //     return {
+  //       ...preState,
+  //       itemTags: updatedItemTags,
+  //     };
+  //   });
+  // };
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
@@ -74,6 +76,7 @@ const EditItemForm = ({ item }) => {
         [name]: value,
       }));
     } else {
+      console.log(name, value, type);
       setFormData((preState) => ({
         ...preState,
         [name]: value,
@@ -96,14 +99,13 @@ const EditItemForm = ({ item }) => {
         throw new Error("Failed to update item");
       }
     } else {
-      console.log(formData, "formData");
       const res = await fetch("/api/Items", {
         method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
         body: JSON.stringify({ formData }),
-        //@ts-ignore
-        "Content-Type": "application/json",
       });
-      console.log(res);
       if (!res.ok) {
         throw new Error("Failed to create item");
       }
@@ -120,7 +122,6 @@ const EditItemForm = ({ item }) => {
         method="post"
         className="flex flex-col gap-3 w-1/2"
       >
-        <h3>{EDITMODE ? "Update item" : "Create New item"}</h3>
         {/* <label>Image banner</label>
         <input
           id="banner"
@@ -130,6 +131,15 @@ const EditItemForm = ({ item }) => {
           required={true}
           // value={formData.imageBanner}
         /> */}
+        <label>Banner</label>
+        <input
+          id="imageBanner"
+          name="imageBanner"
+          type="text"
+          onChange={handleChange}
+          required={true}
+          value={formData.imageBanner}
+        />
         <label>Title</label>
         <input
           id="title"
@@ -175,24 +185,30 @@ const EditItemForm = ({ item }) => {
           <option value="Essay">Essay</option>
         </select>
 
-        {/* <label>Tags</label>
-        <div className="grid grid-cols-2">
-          {formData.itemTags?.map((itemTag, index) => (
-            <input
-              key={index}
-              onChange={handleTagChange}
-              type="text"
-              value={itemTag}
-              data-index={index}
-            />
-          ))}
-        </div>
+        <label>Tags</label>
 
-        <span onClick={addItemTag}>Add tag +</span> */}
+        {item.itemTags?.map((tag, index) => (
+          <input
+            id="itemTags"
+            name="itemTags"
+            key={index}
+            type="text"
+            onChange={handleChange}
+            value={tag}
+            data-index={index}
+          />
+        ))}
+        <input
+          id="itemTags"
+          name="itemTags"
+          type="text"
+          onChange={handleChange}
+        />
+        <span onClick={addItemTag}>Add tag +</span>
 
         <input
           type="submit"
-          className="btn max-w-xs"
+          className="btn max-w-xs border border-orange-accent bg-slate-200 hover:bg-orange-accent"
           value={EDITMODE ? "Update item" : "Create item"}
         />
       </form>

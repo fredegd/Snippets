@@ -1,9 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
-
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { getItemById } from "../../../../_services";
-import CoverPage from "./(components)/CoverPage";
-import ItemDetails from "./(components)/ItemDetails";
+import CoverPage from "./_components/CoverPage";
+import ItemDetails from "./_components/ItemDetails";
 
 export default function ItemPreview({ params }) {
   console.log(params.id);
@@ -21,6 +23,14 @@ export default function ItemPreview({ params }) {
       <div className="grid grid-cols-1 md:grid-cols-4">
         {item ? (
           <div className="col-span-3 ">
+            <div className="ml-auto">
+              <Link
+                href={`/editItem/${item._id}`}
+                style={{ display: "contents" }}
+              >
+                <FontAwesomeIcon icon={faPen}></FontAwesomeIcon>Edit
+              </Link>
+            </div>
             <CoverPage data={item} />
             <ItemDetails item={item} />
           </div>

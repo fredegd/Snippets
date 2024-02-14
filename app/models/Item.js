@@ -1,10 +1,5 @@
-// import mongoose, { Schema } from "mongoose";
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-
-// mongoose.connect(process.env.MONGODB_URI);
-
-// mongoose.Promise = global.Promise;
 
 const itemSchema = new Schema(
   {
@@ -23,13 +18,13 @@ const itemSchema = new Schema(
       required: true,
       default: "cheatsheet",
     },
-    // itemTags: [{ type: mongoose.Schema.Types.ObjectId, ref: "itemTag" }],
-    // itemChapters: [
-    //   { type: mongoose.Schema.Types.ObjectId, ref: "itemChapter" },
-    // ],
-    // votes: { type: Number, default: 0 },
-    // comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
-    // author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    itemTags: [{ type: mongoose.Schema.Types.ObjectId, ref: "ItemTag" }],
+    itemChapters: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "ItemChapter" },
+    ],
+    votes: { type: Number, default: 0 },
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+    author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   {
     timestamps: true,

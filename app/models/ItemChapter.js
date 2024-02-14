@@ -1,10 +1,7 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-// mongoose.connect(process.env.MONGODB_URI);
-
-// mongoose.Promise = global.Promise;
-
-const itemChapterSchema = new mongoose.Schema(
+const itemChapterSchema = new Schema(
   {
     imageBanner: { type: String, required: true },
     title: { type: String, unique: true, required: true },
@@ -19,7 +16,7 @@ const itemChapterSchema = new mongoose.Schema(
 );
 
 const ItemChapter =
-  mongoose.model.ItemChapter ||
+  mongoose.models.ItemChapter ||
   mongoose.model("ItemChapter", itemChapterSchema);
 
 export default ItemChapter;
