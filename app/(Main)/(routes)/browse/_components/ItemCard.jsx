@@ -22,19 +22,19 @@ const ItemCard = ({ item }) => {
   const createdDateTime = formatTimestamp(item.createdAt);
 
   return (
-    <div className="flex flex-col hover:bg-card-hover bg-card rounded-md shadow-lg p-3 m-2">
-      <div className="flex mb-3">
-        <div>
-          <Image
-            width={200}
-            height={300}
-            src={item.imageBanner}
-            alt="random-img"
-            className="rounded-md"
-          />
+    <Link href={`/ItemDisplay/${item._id}`} style={{ display: "contents" }}>
+      <div className="flex flex-col hover:bg-card-hover bg-card rounded-md shadow-lg p-3 m-2">
+        <div className="flex mb-3">
+          <div>
+            <Image
+              width={200}
+              height={300}
+              src={item.imageBanner}
+              alt="random-img"
+              className="rounded-md"
+            />
+          </div>
         </div>
-      </div>
-      <Link href={`/ItemDisplay/${item._id}`} style={{ display: "contents" }}>
         <h4 className="mb-1">{item.title}</h4>
         <hr className="h-px  border-0 bg-page mb-2 "></hr>
         <p className="whitespace-pre-wrap">{item.description}</p>
@@ -48,8 +48,8 @@ const ItemCard = ({ item }) => {
             <span>{item._id}</span>
           </div>
         </div>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };
 

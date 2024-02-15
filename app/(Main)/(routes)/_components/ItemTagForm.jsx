@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { PlusCircle, MinusCircle } from "lucide-react";
 const ItemTagForm = ({ tags, setTags }) => {
   const [newTag, setNewTag] = useState("");
 
@@ -15,17 +16,17 @@ const ItemTagForm = ({ tags, setTags }) => {
   const handleTagChange = (e, index) => {
     const updatedTags = [...tags];
     updatedTags[index] = e.target.value;
-    setTags((prevData) => [...prevData, updatedTags]);
+    setTags(updatedTags);
   };
 
   const handleRemoveTag = (index) => {
     const updatedTags = [...tags];
     updatedTags.splice(index, 1);
-    setTags((prevData) => [...prevData, updatedTags]);
+    setTags(updatedTags);
   };
 
   return (
-    <div className="flex justify-center">
+    <div className="ml-auto">
       <form
         onSubmit={addItemTag}
         method="post"
@@ -46,7 +47,7 @@ const ItemTagForm = ({ tags, setTags }) => {
               onClick={() => handleRemoveTag(index)}
               className="cursor-pointer"
             >
-              Remove
+              <MinusCircle />
             </span>
           </div>
         ))}
@@ -58,7 +59,10 @@ const ItemTagForm = ({ tags, setTags }) => {
             onChange={(e) => setNewTag(e.target.value)}
             value={newTag}
           />
-          <input type="submit" value="Add tag +" />
+
+          <button type="submit">
+            <PlusCircle />
+          </button>
         </div>
       </form>
     </div>

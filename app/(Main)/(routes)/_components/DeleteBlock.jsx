@@ -1,7 +1,5 @@
 "use client";
-
-import { faX } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { MinusCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const DeleteBlock = ({ id }) => {
@@ -24,11 +22,22 @@ const DeleteBlock = ({ id }) => {
   };
 
   return (
-    <div onClick={deleteItem}>
-      <FontAwesomeIcon
-        icon={faX}
-        className=" text-red-400 hover:cursor-pointer hover:text-red-200"
-      />
+    <div className=" mx-5 mt-16 p-2 w-full border border-red-500">
+      <h5> danger zone !!!</h5>
+
+      <div className="flex items-center ">
+        <p>
+          Delete this Object. Once you delete there is no going back. Please be
+          sure of this action.
+        </p>
+        <button
+          onClick={deleteItem}
+          className=" ml-auto flex gap-2 w-48 border rounded-md  border-red-400  items-center justify-center text-red-400  hover:cursor-pointer hover:text-red-200"
+        >
+          <h5>DELETE ITEM</h5>
+          <MinusCircle />
+        </button>
+      </div>
     </div>
   );
 };
