@@ -1,41 +1,42 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Search, Layout, Shield, Mail } from "lucide-react";
+import { FileSearch, Store, Bookmark, PackagePlus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { useSession } from "next-auth/react";
+
 export default function SideBarNav() {
-  const user = null;
+  const { status } = useSession();
+  const user = status === "authenticated";
   const router = useRouter();
   const menuList = [
     {
-      id: 1,
       name: "Browse",
-      icon: Search,
+      icon: FileSearch,
       path: "/browse",
-    },
-    {
-      id: 2,
-      name: "About",
-      icon: Shield,
-      path: "/about",
-    },
-    //                                _||_
-    //                                \  /
-    // here comes the protected routes \/
-    {
-      id: 3,
-      name: "Create Snippet",
-      icon: Layout,
-      path: "/ItemFormPage/new",
+      protected: false,
     },
 
     {
-      id: 4,
+      name: "Create",
+      icon: PackagePlus,
+      path: "/create/new",
+      protected: true,
+    },
+
+    {
       name: "Favourites",
-      icon: Mail,
+      icon: Bookmark,
       path: "/collections/favourites",
+      protected: true,
+    },
+    {
+      name: "About",
+      icon: Store,
+      path: "/about",
+      protected: false,
     },
   ];
   const [activeIndex, setActiveIndex] = useState(0);
@@ -63,7 +64,7 @@ export default function SideBarNav() {
         {menuList.map((item, index) => {
           // if the user is not logged in and the index is greater than 1 (user routes)
           // shows nothing else than the Browse and About button
-          return !user && index > 1 ? null : (
+          return !user && item.protected ? null : (
             <Link href={item.path} passHref={true} key={index}>
               <div
                 className={`flex gap-2 items-center p-5 px-6 text-gray-500

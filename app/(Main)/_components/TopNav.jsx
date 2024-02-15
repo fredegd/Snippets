@@ -3,11 +3,13 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import SearchBar from "./SearchBar";
 import Image from "next/image";
+import { signOut, useSession } from "next-auth/react";
 
-export default function Header() {
-  //   const { user } = useUser();
-  const user = null;
+export default function TopNav() {
   const router = useRouter();
+  const { data: session } = useSession();
+  const user = session?.user;
+
   useEffect(() => {
     console.log(user);
   }, [user]);
@@ -23,13 +25,13 @@ export default function Header() {
       />
       <SearchBar />
       {!user ? (
-        <button onClick={() => router.push("/sign-in")}>Login</button>
+        <button onClick={() => router.push("/login")}>Login</button>
       ) : (
         // <UserButton />
         <div>
-          <h4>Hello John</h4>
-          <button onClick={() => router.push("/profile")}>Profile</button>
-          <button onClick={() => router.push("/sign-out")}>Logout</button>
+          <h4>Hello {user.email}</h4>
+          {/* <button onClick={() => router.push("/profile")}>Profile</button> */}
+          <button onClick={() => router.push("/logout")}>Logout</button>
         </div>
       )}
     </div>
