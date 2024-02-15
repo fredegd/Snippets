@@ -1,20 +1,13 @@
 "use client";
-// import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import { useState } from "react";
 import { Search, Layout, Shield, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function SideBarNav() {
-  //   const { user } = useUser();
   const user = null;
   const router = useRouter();
-  //   useEffect(() => {
-  //     console.log(user);
-  //   }, [user]);
-
   const menuList = [
     {
       id: 1,
@@ -28,7 +21,8 @@ export default function SideBarNav() {
       icon: Shield,
       path: "/about",
     },
-    //                                | |
+    //                                _||_
+    //                                \  /
     // here comes the protected routes \/
     {
       id: 3,
@@ -67,7 +61,7 @@ export default function SideBarNav() {
       </Link>
       <div className="flex flex-col">
         {menuList.map((item, index) => {
-          // if the user is not logged in and the index is greater than 0 (user routes)
+          // if the user is not logged in and the index is greater than 1 (user routes)
           // shows nothing else than the Browse and About button
           return !user && index > 1 ? null : (
             <Link href={item.path} passHref={true} key={index}>
@@ -78,7 +72,7 @@ export default function SideBarNav() {
                 onClick={() => setActiveIndex(index)}
               >
                 <item.icon className="h-6 w-6" />
-                <h2 className="md:flex hidden">{item.name}</h2>
+                <h4 className="md:flex hidden">{item.name}</h4>
               </div>
             </Link>
           );

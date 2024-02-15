@@ -19,7 +19,7 @@ function Browse() {
 
         const tags = new Set();
         tags.add("all tags");
-        res.items.forEach((item) => {
+        res?.items.forEach((item) => {
           item.itemTags.forEach((tag) => {
             tags.add(tag);
           });
