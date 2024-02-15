@@ -7,15 +7,15 @@ import { useSession } from "next-auth/react";
 const Register = () => {
   const [error, setError] = useState("");
   const router = useRouter();
-  const { data: session, status: sessionStatus } = useSession();
+  const { data, status } = useSession();
 
   useEffect(() => {
-    if (sessionStatus === "authenticated") {
+    if (status === "authenticated") {
       router.replace("/dashboard");
     }
-  }, [sessionStatus, router]);
+  }, [status, router]);
 
-  const isValidEmail = (email) => {
+  const emailIsValid = (email) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return emailRegex.test(email);
   };
@@ -24,7 +24,7 @@ const Register = () => {
     const email = e.target[0].value;
     const password = e.target[1].value;
 
-    if (!isValidEmail(email)) {
+    if (!emailIsValid(email)) {
       setError("Email is invalid");
       return;
     }
@@ -50,7 +50,7 @@ const Register = () => {
       }
       if (res.status === 200) {
         setError("");
-        router.push("/login");
+        router.push("/browse ");
       }
     } catch (error) {
       setError("Error, try again");
@@ -58,14 +58,14 @@ const Register = () => {
     }
   };
 
-  if (sessionStatus === "loading") {
+  if (status === "loading") {
     return <h1>Loading...</h1>;
   }
 
   return (
-    sessionStatus !== "authenticated" && (
+    status !== "authenticated" && (
       <div className="flex min-h-screen flex-col items-center justify-between p-24">
-        <div className="bg-[#212121] p-8 rounded shadow-md w-96">
+        <div className="p-8 rounded shadow-md w-96">
           <h1 className="text-4xl text-center font-semibold mb-8">Register</h1>
           <form onSubmit={handleSubmit}>
             <input
@@ -82,7 +82,7 @@ const Register = () => {
             />
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+              className="w-full bg-orange-400 text-white py-2 rounded hover:bg-orange-500"
             >
               {" "}
               Register
@@ -91,7 +91,7 @@ const Register = () => {
           </form>
           <div className="text-center text-gray-500 mt-4">- OR -</div>
           <Link
-            className="block text-center text-blue-500 hover:underline mt-2"
+            className="block text-center text-orange-400 hover:underline mt-2"
             href="/login"
           >
             Login with an existing account

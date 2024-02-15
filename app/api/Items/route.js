@@ -20,6 +20,7 @@ export async function POST(request) {
   try {
     await connectToDB();
     const body = await request.json();
+
     console.log("formdata ITEM is passing", body.formData);
     const itemData = body.formData;
     await Item.create(itemData);
