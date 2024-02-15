@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import ItemTagForm from "./ItemTagForm";
+import ItemChapterForm from "./ItemChapterForm";
+
 import DeleteBlock from "./DeleteBlock";
 
 const EditItemForm = ({ item, setItem }) => {
@@ -38,11 +40,16 @@ const EditItemForm = ({ item, setItem }) => {
 
   const [formData, setFormData] = useState(startingItemData);
   const [tags, setTags] = useState(EDITMODE ? item.itemTags : []);
+  const [chapters, setChapters] = useState(EDITMODE ? item.itemChapters : []);
+  console.log(item.itemChapters);
 
   useEffect(() => {
-    console.log("tag", tags);
-    setFormData((prevState) => ({ ...prevState, itemTags: tags }));
-  }, [tags]);
+    setFormData((prevState) => ({
+      ...prevState,
+      itemTags: tags,
+      itemChapters: chapters,
+    }));
+  }, [tags, chapters]);
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
@@ -164,6 +171,7 @@ const EditItemForm = ({ item, setItem }) => {
         </form>
         <ItemTagForm tags={tags} setTags={setTags} />
       </div>
+      <ItemChapterForm chapters={chapters} setChapters={setChapters} />
       <div className="flex flex-col">
         {EDITMODE && <DeleteBlock id={item._id} />}
       </div>

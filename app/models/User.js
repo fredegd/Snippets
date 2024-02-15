@@ -5,7 +5,7 @@ const userSchema = new Schema(
   {
     username: { type: String, unique: true, required: true },
     email: { type: String, unique: true, required: true },
-    password: { type: String, required: true },
+    password: { type: String, required: false },
     role: { type: String, enum: ["admin", "user"], default: "user" },
     items: [{ type: mongoose.Schema.Types.ObjectId, ref: "Item" }],
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],

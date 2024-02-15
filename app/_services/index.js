@@ -15,7 +15,6 @@ export const getItems = async () => {
 };
 
 export const getItemById = async (id) => {
-  // const url = `/api/Items/${id}`;
   const url = `/api/Items/${id}`;
   try {
     const res = await fetch(url, {
