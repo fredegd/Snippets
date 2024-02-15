@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-export default function CategoryFilter({ filters, selectedCategory }) {
+export default function CategoryFilter({ filters, selectedTag }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const filterOptions = filters.map((item, index) => {
@@ -19,10 +19,10 @@ export default function CategoryFilter({ filters, selectedCategory }) {
               }`}
               onClick={() => {
                 setActiveIndex(index);
-                selectedCategory(item.value);
+                selectedTag(item.value);
               }}
             >
-              <h2 htmlFor={item.id}>{item.name}</h2>
+              <p htmlFor={item.id}>{item.name}</p>
             </button>
           </div>
         );
