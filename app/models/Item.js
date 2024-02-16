@@ -18,7 +18,6 @@ const itemSchema = new Schema(
       required: true,
       default: "cheatsheet",
     },
-    // itemTags: [{ type: mongoose.Schema.Types.ObjectId, ref: "ItemTag" }],
     itemTags: [{ type: String }],
     itemChapters: [
       { type: mongoose.Schema.Types.ObjectId, ref: "ItemChapter" },

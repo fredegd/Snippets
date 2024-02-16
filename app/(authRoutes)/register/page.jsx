@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import TitleLogo from "@/app/_components/TitleLogo";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
@@ -32,7 +33,6 @@ const Register = () => {
     const name = user.name;
     const email = user.email;
     const password = user.password;
-    console.log(name, email, password, "name, email, password"); //////temporary!!!!!
 
     if (!email || !name || !password) {
       setError("All fields are required");
@@ -61,13 +61,13 @@ const Register = () => {
           setError("This email is already registered");
         }
         if (res.status === 200 || res.status === 201) {
-          console.log("user created successfully");
-          router.push("/browse ");
+          setError("");
+          router.push("/login");
         }
       });
     } catch (error) {
       setError("Error,please try again");
-      console.log(error, "errooooor");
+      console.log(error, "error from server response");
     } finally {
       setLoading(false);
       setUser({ name: "", email: "", password: "" });
@@ -77,6 +77,7 @@ const Register = () => {
   return (
     status !== "authenticated" && (
       <div className="flex min-h-screen flex-col items-center justify-between p-24">
+        <TitleLogo />
         <div className="p-8 rounded shadow-md w-96">
           <h1 className="text-4xl text-center font-semibold mb-8">Register</h1>
           <form onSubmit={handleSubmit}>

@@ -1,14 +1,28 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+
 import { getItemById } from "@/app/_services";
 import ItemForm from "@/app/(Main)/(routes)/_components/ItemForm";
 import { ChevronLeftCircle } from "lucide-react";
 import Link from "next/link";
 
 export default function ItemFormPage({ params }) {
-  console.log(params.id, "params.id in the form page");
+  const { data, status } = useSession();
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   const [itemData, setItemData] = useState();
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      setLoading(false);
+    } else {
+      setLoading(true);
+      router.push("/login");
+    }
+  }, [router, status]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +32,7 @@ export default function ItemFormPage({ params }) {
     fetchData();
   }, [params.id]);
 
-  return (
+  return !loading ? (
     <div>
       <div className=" flex justify-between">
         <h1>Editor</h1>
@@ -31,14 +45,8 @@ export default function ItemFormPage({ params }) {
         </Link>
       </div>
       <div>
-        {itemData ? (
-          <ItemForm item={itemData} />
-        ) : (
-          <div className="flex justify-center items-center h-screen">
-            <h2>Loading...</h2>
-          </div>
-        )}
+        <ItemForm item={itemData} />
       </div>
     </div>
-  );
+  ) : null;
 }

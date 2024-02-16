@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 
 export default function TextAnimation() {
   const str1 =
-    "A        Unique        Selection        of        Useful        CODE        SNIPPETS          &        RESOURCES               ";
+    "A        Unique        Selection        of        Useful        CODE        BLOCKS          &        RESOURCES               ";
 
   useEffect(() => {
     const textContainer = document.getElementById("textContainer");

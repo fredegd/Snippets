@@ -21,15 +21,17 @@ export const POST = async (req) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const newUser = await new User({
+    const newUser = new User({
       name,
       email,
       password: hashedPassword,
     });
 
     try {
-      await newUser.save();
-      return NextResponse.json("User created successfully", { status: 200 });
+      const user = await newUser.save().then((user) => {
+        console.log("User created successfully:", user);
+      });
+      return new NextResponse("user registered", { status: 200 });
     } catch (saveError) {
       console.error("Error saving user to the database:", saveError);
       return NextResponse.json(
