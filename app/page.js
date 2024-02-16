@@ -2,8 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import TextAnimation from "./_components/TextAnimation";
 import EnterButton from "./_components/EnterButton";
+import connectToDB from "@/app/database";
 
-export default function Home() {
+export default async function Home() {
+  await connectToDB();
   return (
     <div className="bg-white w-full h-screen overflow-scroll">
       <div className="w-full h-1/6 flex items-center justify-center border-b">

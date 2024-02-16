@@ -3,8 +3,8 @@ import Item from "@/app/models/Item";
 import { NextResponse } from "next/server";
 
 export async function GET() {
+  await connectToDB();
   try {
-    await connectToDB();
     const items = await Item.find();
     return items && NextResponse.json({ items }, { status: 200 });
   } catch (error) {

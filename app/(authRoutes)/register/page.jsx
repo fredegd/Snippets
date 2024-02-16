@@ -56,6 +56,7 @@ const Register = () => {
         },
         body: JSON.stringify({ name, email, password }),
       }).then((res) => {
+        console.log(res, "response from server");
         if (res.status === 400) {
           setError("This email is already registered");
         }

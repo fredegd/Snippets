@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 const Login = () => {
   const router = useRouter();
   const [error, setError] = useState("");
-  // const session = useSession();
+  const [loading, setLoading] = useState(false);
   const { data: session, status: sessionStatus } = useSession();
 
   useEffect(() => {
@@ -22,7 +22,6 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
     const email = e.target[0].value;
     const password = e.target[1].value;
@@ -53,9 +52,7 @@ const Login = () => {
     }
   };
 
-  if (sessionStatus === "loading") {
-    return <h1>Loading...</h1>;
-  }
+
 
   return (
     sessionStatus !== "authenticated" && (
@@ -79,8 +76,7 @@ const Login = () => {
               type="submit"
               className="w-full bg-orange-400 text-white py-2 rounded hover:bg-orange-500"
             >
-              {" "}
-              Sign In
+              {loading ? "processing..." : "Sign In"}
             </button>
             <p className="text-red-600 text-[16px] mb-4">{error && error}</p>
           </form>

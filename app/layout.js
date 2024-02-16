@@ -4,10 +4,6 @@ import { getServerSession } from "next-auth";
 import SessionProvider from "@/app/_services/SessionProvider";
 import connectToDB from "./database";
 
-import { config } from "@fortawesome/fontawesome-svg-core";
-import "@fortawesome/fontawesome-svg-core/styles.css";
-
-config.autoAddCss = false;
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -17,6 +13,7 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const session = await getServerSession();
+  // const db = await connectToDB();
   return (
     <html lang="en">
       <body className={inter.className}>

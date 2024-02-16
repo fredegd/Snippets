@@ -1,6 +1,5 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import SearchBar from "./SearchBar";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
@@ -9,10 +8,7 @@ export default function TopNav() {
   const router = useRouter();
   const { data: session } = useSession();
   const user = session?.user;
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  console.log(user, "user from topnav");
 
   return (
     <div className="h-24 sticky top-0 ml-0 sm:ml-24 md:ml-64 p-4 border-b flex items-center justify-between bg-white">
