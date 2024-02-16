@@ -1,13 +1,13 @@
 import connectToDB from "@/app/database";
-import ItemTag from "@/app/models/ItemTag";
+import User from "@/app/models/User";
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
   try {
     await connectToDB();
     const { id } = params;
-    const foundTag = await ItemTag.findOne({ _id: id });
-    return NextResponse.json({ foundTag }, { status: 200 });
+    const foundUser = await User.findOne({ _id: id });
+    return NextResponse.json({ status: 200, foundUser });
   } catch (err) {
     console.log(err);
     return NextResponse.json({ message: "Error", err }, { status: 500 });
@@ -19,11 +19,11 @@ export async function PUT(request, { params }) {
     await connectToDB();
     const { id } = params;
     const body = await request.json();
-    const tagData = body.formData;
-    const updateTagData = await ItemTag.findByIdAndUpdate(id, {
-      ...tagData,
+    const userData = body.formData;
+    const updateUserData = await User.findByIdAndUpdate(id, {
+      ...userData,
     });
-    return NextResponse.json({ message: "ItemTag Updated" }, { status: 200 });
+    return NextResponse.json({ message: "User Updated" }, { status: 200 });
   } catch (err) {
     console.log(err);
     return NextResponse.json({ message: "Error", err }, { status: 500 });
@@ -34,8 +34,8 @@ export async function DELETE(request, { params }) {
   try {
     await connectToDB();
     const { id } = params;
-    const deleteTag = await ItemTag.findByIdAndDelete(id);
-    return NextResponse.json({ message: "ItemTag Deleted" }, { status: 200 });
+    const deleteUser = await User.findByIdAndDelete(id);
+    return NextResponse.json({ message: "User Deleted" }, { status: 200 });
   } catch (err) {
     console.log(err);
     return NextResponse.json({ message: "Error", err }, { status: 500 });

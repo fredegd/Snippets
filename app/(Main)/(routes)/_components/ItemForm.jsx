@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import ItemTagForm from "./ItemTagForm";
 import ItemChapterForm from "./ItemChapterForm";
-
+import { useSession } from "next-auth/react";
 import DeleteBlock from "./DeleteBlock";
 
 const EditItemForm = ({ item, setItem }) => {
