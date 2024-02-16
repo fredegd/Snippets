@@ -76,9 +76,9 @@ const Register = () => {
 
   return (
     status !== "authenticated" && (
-      <div className="flex min-h-screen flex-col items-center justify-between p-24">
+      <div className="flex min-h-screen flex-col items-center justify-center p-10">
         <TitleLogo />
-        <div className="p-8 rounded shadow-md w-96">
+        <div className=" my-auto p-8 rounded shadow-md w-96 border border-orange-400">
           <h1 className="text-4xl text-center font-semibold mb-8">Register</h1>
           <form onSubmit={handleSubmit}>
             <input
