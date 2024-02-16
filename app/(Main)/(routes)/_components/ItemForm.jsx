@@ -8,6 +8,8 @@ import { useSession } from "next-auth/react";
 import DeleteBlock from "./DeleteBlock";
 
 const EditItemForm = ({ item, setItem }) => {
+
+console.log(item);
   const router = useRouter();
 
   const EDITMODE = item._id === "new" ? false : true;

@@ -9,7 +9,8 @@ import { ChevronLeftCircle } from "lucide-react";
 import Link from "next/link";
 
 export default function ItemFormPage({ params }) {
-  const { data, status } = useSession();
+  console.log(params);
+  const { status } = useSession();
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -44,9 +45,11 @@ export default function ItemFormPage({ params }) {
           </h3>
         </Link>
       </div>
-      <div>
-        <ItemForm item={itemData} />
-      </div>
+      {itemData && (
+        <div>
+          <ItemForm item={itemData} />
+        </div>
+      )}
     </div>
   ) : null;
 }
