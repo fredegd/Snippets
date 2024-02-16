@@ -22,10 +22,11 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     const email = e.target[0].value;
     const password = e.target[1].value;
-
+    console.log(email, password);
     if (!emailIsValid(email)) {
       setError("Email is invalid");
       return;
@@ -45,8 +46,10 @@ const Login = () => {
     if (res?.error) {
       setError("Invalid email or password");
       if (res?.url) router.replace("/login");
-    } else {
+    } else if (res?.ok) {
+      console.log(res);
       setError("");
+      router.replace("/browse");
     }
   };
 

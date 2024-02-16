@@ -6,6 +6,8 @@ import { useSession } from "next-auth/react";
 
 const Register = () => {
   const [error, setError] = useState("");
+  const [user, setUser] = useState({ name: "", email: "", password: "" });
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { data, status } = useSession();
 
@@ -19,48 +21,57 @@ const Register = () => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return emailRegex.test(email);
   };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    return setUser((prevInfo) => ({ ...prevInfo, [name]: value }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const email = e.target[0].value;
-    const password = e.target[1].value;
+    setLoading(true);
+    const name = user.name;
+    const email = user.email;
+    const password = user.password;
+    console.log(name, email, password, "name, email, password"); //////temporary!!!!!
+
+    if (!email || !name || !password) {
+      setError("All fields are required");
+      return;
+    }
 
     if (!emailIsValid(email)) {
       setError("Email is invalid");
       return;
     }
 
-    if (!password || password.length < 8) {
+    if (password.length < 8) {
       setError("Password is invalid");
       return;
     }
-
     try {
       const res = await fetch("/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
+        body: JSON.stringify({ name, email, password }),
+      }).then((res) => {
+        if (res.status === 400) {
+          setError("This email is already registered");
+        }
+        if (res.status === 200 || res.status === 201) {
+          console.log("user created successfully");
+          router.push("/browse ");
+        }
       });
-      if (res.status === 400) {
-        setError("This email is already registered");
-      }
-      if (res.status === 200) {
-        setError("");
-        router.push("/browse ");
-      }
     } catch (error) {
-      setError("Error, try again");
+      setError("Error,please try again");
       console.log(error, "errooooor");
+    } finally {
+      setLoading(false);
+      setUser({ name: "", email: "", password: "" });
     }
   };
-
-  if (status === "loading") {
-    return <h1>Loading...</h1>;
-  }
 
   return (
     status !== "authenticated" && (
@@ -70,22 +81,36 @@ const Register = () => {
           <form onSubmit={handleSubmit}>
             <input
               type="text"
+              placeholder="Your Name"
+              name="name"
               className="w-full border border-gray-300 text-black rounded px-3 py-2 mb-4 focus:outline-none focus:border-blue-400 focus:text-black"
+              value={user.name}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              type="text"
               placeholder="Email"
+              name="email"
+              className="w-full border border-gray-300 text-black rounded px-3 py-2 mb-4 focus:outline-none focus:border-blue-400 focus:text-black"
+              value={user.email}
+              onChange={handleInputChange}
               required
             />
             <input
               type="password"
-              className="w-full border border-gray-300 text-black rounded px-3 py-2 mb-4 focus:outline-none focus:border-blue-400 focus:text-black"
               placeholder="Password"
+              name="password"
+              className="w-full border border-gray-300 text-black rounded px-3 py-2 mb-4 focus:outline-none focus:border-blue-400 focus:text-black"
+              value={user.password}
+              onChange={handleInputChange}
               required
             />
             <button
               type="submit"
               className="w-full bg-orange-400 text-white py-2 rounded hover:bg-orange-500"
             >
-              {" "}
-              Register
+              {loading ? "processing..." : "Register"}
             </button>
             <p className="text-red-600 text-[16px] mb-4">{error && error}</p>
           </form>

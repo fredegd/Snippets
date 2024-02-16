@@ -6,7 +6,6 @@ export async function GET(request, { params }) {
   try {
     await connectToDB();
     const { id } = params;
-    console.log("id is here", id);
     const foundItem = await Item.findOne({ _id: id });
     return NextResponse.json({ foundItem }, { status: 200 });
   } catch (err) {

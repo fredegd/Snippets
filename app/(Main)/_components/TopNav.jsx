@@ -31,7 +31,9 @@ export default function TopNav() {
         <div>
           <h4>Hello {user.email}</h4>
           {/* <button onClick={() => router.push("/profile")}>Profile</button> */}
-          <button onClick={() => router.push("/logout")}>Logout</button>
+          <button onClick={() => signOut({ callbackUrl: "/login" })}>
+            Sign out
+          </button>{" "}
         </div>
       )}
     </div>

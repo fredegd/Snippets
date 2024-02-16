@@ -3,8 +3,15 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema(
   {
-    username: { type: String, unique: true, required: false },
-    email: { type: String, unique: true, required: true },
+    name: {
+      type: String,
+      required: [true, "please write your fullname"],
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: [true, "please provide a valid email"],
+    },
     password: { type: String, required: false },
     role: { type: String, enum: ["admin", "user"], default: "user" },
     items: [{ type: mongoose.Schema.Types.ObjectId, ref: "Item" }],

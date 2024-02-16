@@ -1,9 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
-import { getItemById } from "../../../../_services";
+import { getItemById } from "@/app/_services";
 import CoverPage from "./_components/CoverPage";
 import ItemDetails from "./_components/ItemDetails";
 import { useSession } from "next-auth/react";
@@ -12,7 +10,6 @@ import { FilePenLine } from "lucide-react";
 export default function ItemPreview({ params }) {
   const { status } = useSession();
   console.log(status);
-  console.log(params.id);
   const [item, setItem] = useState();
   useEffect(() => {
     const fetchData = async () => {
